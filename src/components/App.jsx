@@ -31,15 +31,8 @@ export const App = () => {
   const handleBadBtnChangeBack = () => {
     setBedBtn('Bad');
   };
-  const countTotalFeedback = () => {
-    const total = good + neutral + bad;
-    return total;
-  };
-  const countPositiveFeedbackPercentage = () => {
-    const percentage =
-      countTotalFeedback() === 0 ? 0 : (good / countTotalFeedback()) * 100;
-    return Number(percentage.toFixed(2));
-  };
+  const total = good + neutral + bad;
+  const percentage = total === 0 ? 0 : (good / total) * 100;
   return (
     <div className={css.container}>
       <h1>{'Please leave feedback'}</h1>
@@ -73,7 +66,7 @@ export const App = () => {
           </button>
         </li>
       </ul>
-      {countTotalFeedback() === 0 ? (
+      {total === 0 ? (
         <Notification message="There is no feedback" />
       ) : (
         <Statistics
@@ -81,8 +74,8 @@ export const App = () => {
           good={good}
           neutral={neutral}
           bad={bad}
-          total={countTotalFeedback()}
-          percentage={countPositiveFeedbackPercentage()}
+          total={total}
+          percentage={percentage}
         />
       )}
     </div>
